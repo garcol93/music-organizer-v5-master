@@ -15,6 +15,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    //hay reproducciones en curso
+    private boolean reproduciendo;
 
     /**
      * Create a MusicOrganizer
@@ -24,6 +26,7 @@ public class MusicOrganizer
         tracks = new ArrayList<Track>();
         player = new MusicPlayer();
         reader = new TrackReader();
+        reproduciendo = false;
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
@@ -56,6 +59,7 @@ public class MusicOrganizer
         if(indexValid(index)) {
             Track track = tracks.get(index);
             track.incrementPlayCount();
+            reproduciendo = true;
             player.startPlaying(track.getFilename());
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
         }
@@ -125,6 +129,7 @@ public class MusicOrganizer
     {
         if(tracks.size() > 0) {
             tracks.get(0).incrementPlayCount();
+            reproduciendo = true;
             player.startPlaying(tracks.get(0).getFilename());
         }
     }
@@ -135,6 +140,7 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+        reproduciendo = false;
     }
 
     /**
@@ -189,11 +195,27 @@ public class MusicOrganizer
         }
     }
 
+    /**
+     * permite introducir genero
+     */
     public void setGeneroOfTrack(int posicion , String tipoGenero)
     {
         if(posicion >= 0 && posicion< tracks.size())
         {
             tracks.get(posicion).setGenero(tipoGenero);
+        }
+    }
+
+    /**
+     * permite sabaer si hay reproducciones
+     */
+    public void hayReproducciones()
+    {if(reproduciendo)
+        {
+            System.out.println("Hay reproducciones en curso");
+        }
+        else {
+            System.out.println("No hay reproducciones en curso");
         }
     }
 }
