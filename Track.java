@@ -13,7 +13,10 @@ public class Track
     private String title;
     // Where the track is stored.
     private String filename;
+    //contador reproducciones
     private int playCount;
+    //Genero 
+    private String genero;
 
     /**
      * Constructor for objects of class Track.
@@ -25,6 +28,7 @@ public class Track
     {
         setDetails(artist, title, filename);
         playCount = 0;
+        genero ="";
     }
 
     /**
@@ -37,6 +41,7 @@ public class Track
     {
         setDetails("unknown", "unknown", filename);
         playCount = 0;
+        genero ="";
     }
 
     /**
@@ -72,7 +77,7 @@ public class Track
      */
     public String getDetails()
     {
-        return artist + ": " + title + "  (file: " + filename + ") Reproducciones :"+ playCount;
+        return artist + ": " + title + "  (file: " + filename + ") Reproducciones :"+ playCount + " Genero: " + genero;
     }
 
     /**
@@ -102,5 +107,15 @@ public class Track
     public void incrementPlayCount()
     {
         playCount++;
+    }
+
+    public void setGenero(String tipoGenero)
+    {
+        this.genero = tipoGenero;
+    }
+
+    public String getGenero()
+    {
+        return genero;
     }
 }
